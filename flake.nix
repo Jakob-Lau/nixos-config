@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, flake-parts, ... }@inputs: 
     flake-parts.lib.mkFlake { inherit inputs; } {
 
       imports = [
