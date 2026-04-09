@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "jakobs-server"; # Define your hostname.
+  networking.hostName = "server-jakob"; # Define your hostname.
 
   services.openssh = {
     enable = true;
