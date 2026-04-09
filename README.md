@@ -1,0 +1,2 @@
+# real-nixos
+Nixos config
