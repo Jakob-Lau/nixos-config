@@ -26,7 +26,7 @@ let
         ({ pkgs, ... }: {
           nixpkgs.overlays = [
             overlay-unstable
-            (import ../pkgs)
+            # (import ../pkgs)  # enable once repository-root pkgs directory is used
           ];
           nix.nixPath = [
             "nixpkgs=${pkgs.path}"
