@@ -39,7 +39,7 @@ in
     };
     networking.firewall.allowedTCPPorts = [ cfg.port ];
     # add dns entry to dnsmasq
-    myDns.entries = lib.mkIf cfg.dnsEntry != null [
+    myDns.entries = lib.mkIf (cfg.dnsEntry != null) [
       { name = cfg.dnsEntry; port = cfg.port; }
     ];
   };
