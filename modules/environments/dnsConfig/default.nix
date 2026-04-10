@@ -8,7 +8,7 @@ in
     enable = mkEnableOption "Local Network DNS Server + Reverse Proxy";
 
     ipAddress = mkOption {
-      type = types.strMatching "^[\d]+\.[\d]+\.[\d]+\.[\d]+$";
+      type = types.strMatching "^\d+\.\d+\.\d+\.\d+$";
       default = null;
       example = "192.168.0.50";
       description = "The IP Address to route resolve hostnames to.";
