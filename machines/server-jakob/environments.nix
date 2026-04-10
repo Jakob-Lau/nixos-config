@@ -11,7 +11,7 @@ in
       settings =  {
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
         PAPERLESS_ADMIN_USER= "jakob";
-      }
-    }
-  }
+      };
+    };
+  };
 }
