@@ -15,12 +15,26 @@ in
     };
 
     entries = mkOption {
-      type = types.listOf types.str;
+      type = types.listOf (types.submodule {
+        options = {
+          name = mkOption {
+            type = types.str;
+            example = "paperless";
+            description = "Hostname (e.g. paperless)";
+          };
+
+          port = mkOption {
+            type = types.port;
+            example = 8080;
+            description = "Target port for the service";
+          };
+        };
+      });
       default = [];
       example = [
-        "paperless"
+        { name = "paperless"; port = 8080; }
       ];
-      description = ""
+      description = "List of DNS entries mapping hostnames to ports";
     };
   };
 
@@ -49,8 +63,23 @@ in
             "8.8.8.8"
             "8.8.4.4"
           ];
-          address = builtins.map (host: "/${host}.home/${cfg.ipAddress}") cfg.entries;
+          address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
         };
+      };
+      services.nginx = {
+        enable = true;
+        recommendedProxySettings = true;
+
+        virtualHosts = builtins.listToAttrs
+          builtins.map (entry: {
+            name = "${entry.name}.home";
+            value = {
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${builtins.toString entry.port}";
+                proxyWebsockets = true;
+              };
+            };
+          }) cfg.entries;
       };
     })
   ];
