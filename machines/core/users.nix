@@ -18,7 +18,7 @@
       "wheel" # `sudo` for the user.
     ];
     openssh.authorizedKeys.keys = [
-        "ssh-ed25519 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1cVtRzblkjEJlT7e9aZaudVbVCqHk1O2sswAMAMKPi desktop-pc"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1cVtRzblkjEJlT7e9aZaudVbVCqHk1O2sswAMAMKPi desktop-pc"
     ];
   };
 
