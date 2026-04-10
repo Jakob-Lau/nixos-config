@@ -20,7 +20,7 @@ in
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
       };
       description = "Extra configuration options";
-    }
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -29,6 +29,6 @@ in
       # address = "0.0.0.0";
       port = cfg.port;
       settings = cfg.settings;
-    }
-  }
+    };
+  };
 }
