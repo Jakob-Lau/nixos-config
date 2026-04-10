@@ -83,8 +83,9 @@ in
         );
       };
 
-      # set webserver network ports to open
-      networking.firewall.allowedTCPPorts = [ 80 443 ];
+      # set webserver network ports to open (53 required for DNS server)
+      networking.firewall.allowedTCPPorts = [ 53 80 443 ];
+      networking.firewall.allowedUDPPorts = [ 53 ];
     })
   ];
 }
