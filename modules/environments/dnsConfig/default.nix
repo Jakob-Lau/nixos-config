@@ -70,7 +70,7 @@ in
         enable = true;
         recommendedProxySettings = true;
 
-        virtualHosts = builtins.listToAttrs
+        virtualHosts = builtins.listToAttrs (
           builtins.map (entry: {
             name = "${entry.name}.home";
             value = {
@@ -79,7 +79,8 @@ in
                 proxyWebsockets = true;
               };
             };
-          }) cfg.entries;
+          }) cfg.entries
+        );
       };
     })
   ];
