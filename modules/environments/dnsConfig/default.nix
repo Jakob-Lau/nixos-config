@@ -82,6 +82,9 @@ in
           }) cfg.entries
         );
       };
+
+      # set webserver network ports to open
+      networking.firewall.allowedTCPPorts = [ 80 443 ];
     })
   ];
 }
