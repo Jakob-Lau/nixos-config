@@ -21,14 +21,26 @@ in
       };
       description = "Extra configuration options";
     };
+
+    dnsEntry = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "paperless";
+      description = "Name to add to DNS entries. If null, no entry is added.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.paperless = {
       enable = true;
-      # address = "0.0.0.0";
+      address = "0.0.0.0";
       port = cfg.port;
       settings = cfg.settings;
     };
+    networking.firewall.allowedTCPPorts = [ cfg.port ];
+    # add dns entry to dnsmasq
+    myDns.entries = lib.mkIf cfg.dnsEntry != null [
+      cfg.dnsEntry
+    ];
   };
 }

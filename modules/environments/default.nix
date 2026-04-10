@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./dnsConfig
     ./paperless
   ];
 }
