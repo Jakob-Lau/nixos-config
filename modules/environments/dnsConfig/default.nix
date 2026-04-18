@@ -64,6 +64,9 @@ in
             "8.8.4.4"
           ];
           address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
+
+          # Increase cache size to solve "We detected weir network activity from you address" warning
+          cache-size = 2000;
         };
       };
       services.nginx = {
