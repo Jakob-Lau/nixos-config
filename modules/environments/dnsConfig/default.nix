@@ -15,7 +15,7 @@ in
     };
 
     tailscaleIpAddress = mkOption {
-      type = types.nullOr types.strMatching "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$";
+      type = types.nullOr (types.strMatching "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$");
       default = null;
       example = "100.73.143.17";
       description = "If set, the DNS Server will also listen to his IP Address of the tailscale network";
