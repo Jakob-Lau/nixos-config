@@ -14,6 +14,15 @@ sudo nixos-rebuild switch
 sudo nixos-rebuild switch --flake /etc/nixos#<machine-name>
 ```
 
+## What to do after startup
+
+### Tailscale
+
+To log into tailscale:
+```shell
+sudo tailscale up
+```
+
 # todos
 - [ ] How to properly define user groups per machine?
 - [ ] How to properly define the ssh keys per machine?

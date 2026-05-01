@@ -8,6 +8,13 @@ in
     dnsConfig = {
       enable = true;
       ipAddress = "192.168.0.96";
+      tailscaleIpAddress = "100.73.143.17";
+    };
+
+    tailscale = {
+      enable = true;
+      subnetRouter = "192.168.0.0/24";
+      # authKeyFilePath = "/run/secrets/tailscale-key";
     };
     
     paperless = {
