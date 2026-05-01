@@ -73,7 +73,7 @@ in
           # Listen on interfaces (local and tailsacle) for DNS requests
           listen-address = [
             "127.0.0.1"
-          ] ++ lib.optional (cfg.tailscaleIpAddress != null) cfg.tailscaleIpAddress;
+          ] ++ lib.optionals (cfg.tailscaleIpAddress != null) [ cfg.tailscaleIpAddress ];
 
           build-interfaces = true;
 
