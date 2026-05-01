@@ -7,7 +7,7 @@ in
     enable = mkEnableOption "Tailscale VPN Setup";
 
     subnetRouter = mkOption {
-      type = types.nullOr types.strMatching "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$";
+      type = types.nullOr (types.strMatching "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$");
       default = null;
       example = 192.168.0.0/24;
       description = ''
@@ -36,6 +36,7 @@ in
       
       authKeyFile = lib.mkIf (cfg.authKeyFilePath != null) cfg.authKeyFilePath;
 
+      useRoutingFeatures = lib.mkIf (cfg.subnetRouter != null) "server";
       extraUpFlags = lib.optionals (cfg.subnetRouter != null) [
         "--advertise-routes=${cfg.subnetRouter}"
       ];
