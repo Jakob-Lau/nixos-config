@@ -19,7 +19,7 @@ in
       default = null;
       example = "100.73.143.17";
       description = "If set, the DNS Server will also listen to his IP Address of the tailscale network";
-    }
+    };
 
     entries = mkOption {
       type = types.listOf (types.submodule {
