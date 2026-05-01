@@ -73,9 +73,7 @@ in
           # Listen on interfaces (local and tailsacle) for DNS requests
           listen-address = [
             "127.0.0.1"
-          ] ++ lib.optionals (cfg.tailscaleIpAddress != null) [ cfg.tailscaleIpAddress ];
-
-          build-interfaces = true;
+          ] ++ lib.optional (cfg.tailscaleIpAddress != null) cfg.tailscaleIpAddress;
 
           address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
 
