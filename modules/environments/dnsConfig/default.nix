@@ -63,6 +63,9 @@ in
             "8.8.8.8"
             "8.8.4.4"
           ];
+          # Listen on interfaces (local and tailsacle) for DNS requests
+          bind-interfaces = false;
+
           address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
 
           # Increase cache size to solve "We detected weir network activity from you address" warning

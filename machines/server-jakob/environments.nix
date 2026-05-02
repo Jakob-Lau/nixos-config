@@ -9,6 +9,12 @@ in
       enable = true;
       ipAddress = "192.168.0.96";
     };
+
+    tailscale = {
+      enable = true;
+      subnetRouter = "192.168.0.0/24";
+      # authKeyFilePath = "/run/secrets/tailscale-key";
+    };
     
     paperless = {
       enable = true;
