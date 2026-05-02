@@ -14,13 +14,6 @@ in
       description = "The IP Address to route resolve hostnames to.";
     };
 
-    tailscaleIpAddress = mkOption {
-      type = types.nullOr (types.strMatching "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$");
-      default = null;
-      example = "100.73.143.17";
-      description = "If set, the DNS Server will also listen to his IP Address of the tailscale network";
-    };
-
     entries = mkOption {
       type = types.listOf (types.submodule {
         options = {
@@ -71,9 +64,7 @@ in
             "8.8.4.4"
           ];
           # Listen on interfaces (local and tailsacle) for DNS requests
-          listen-address = [
-            "127.0.0.1"
-          ] ++ lib.optional (cfg.tailscaleIpAddress != null) cfg.tailscaleIpAddress;
+          bind-interfaces = false;
 
           address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
 

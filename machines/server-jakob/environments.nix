@@ -8,7 +8,6 @@ in
     dnsConfig = {
       enable = true;
       ipAddress = "192.168.0.96";
-      tailscaleIpAddress = "100.73.143.17";
     };
 
     tailscale = {
