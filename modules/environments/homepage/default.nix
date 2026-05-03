@@ -18,7 +18,7 @@ in
     services.homepage-dashboard = {
       enable = true;
       listenPort = dashboardPort;
-      allowedHosts = "${dashboardHost}.home:${toString dashboardPort},localhost:${toString dashboardPort},127.0.0.1:${dashboardPort}";
+      allowedHosts = "${dashboardHost}.home:${toString dashboardPort},localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
 
       # Services (tiles)
       services = [
