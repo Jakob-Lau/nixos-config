@@ -20,13 +20,18 @@ in
       listenPort = dashboardPort;
       allowedHosts = "${dashboardHost}.home,localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
 
+      title = dashboardHost;
+      headerStyle = "clean";
+
       # Services (tiles)
       services = [
         {
-          "System" = [
+          "Documents" = [
             {
-              "Resources" = {
-                description = "System metrics";
+              "Paperless" = {
+                icon = "paperless-ngx.png";
+                href = "http://paperless.home";
+                description = "Document management";
               };
             }
           ];
@@ -35,6 +40,17 @@ in
 
       # Widgets
       widgets = [
+        # Clock
+        {
+          datetime = {
+            locale = "de";
+            format = {
+              dateStyle = "long";
+              timeStyle = "short";
+            };
+          };
+        }
+        # System resources
         {
           resources = {
             cpu = true;
@@ -42,6 +58,12 @@ in
             memory = true;
             disk = "/";
             network = true;
+          };
+        }
+        # basic system info
+        {
+          info = {
+            uptime = true;
           };
         }
       ];
