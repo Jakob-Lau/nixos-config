@@ -10,7 +10,7 @@ let
   dashboardHost = "dashboard";
 in
 {
-  options.my.homepage.services = with lib; {
+  options.my.profiles.homepage = with lib; {
     enable = mkEnableOption "Homepage Dashboard";
   };
 
