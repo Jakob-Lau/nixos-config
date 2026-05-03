@@ -20,8 +20,12 @@ in
       listenPort = dashboardPort;
       allowedHosts = "${dashboardHost}.home,localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
 
-      title = dashboardHost;
-      headerStyle = "clean";
+      settings = {
+        title = dashboardHost;
+        headerStyle = "clean";
+        language = "de";
+        target = "_blank";
+      };
 
       # Services (tiles)
       services = [
@@ -50,6 +54,18 @@ in
             };
           };
         }
+        {
+          openmeteo = {
+            label = "Hemmingen";
+            timezone = "Europe/Germany";
+            units = "metric";
+            cache = 5;
+            format = {
+              maximumFractionDigits = 1;
+            };
+          };
+        }
+
         # System resources
         {
           resources = {
