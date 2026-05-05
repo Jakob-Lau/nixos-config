@@ -21,7 +21,7 @@ in
       allowedHosts = "${dashboardHost}.home,localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
 
       settings = {
-        title = dashboardHost;
+        # title = dashboardHost;
         headerStyle = "clean";
         language = "de";
         target = "_blank";
@@ -51,17 +51,6 @@ in
             format = {
               dateStyle = "long";
               timeStyle = "short";
-            };
-          };
-        }
-        {
-          openmeteo = {
-            label = "Hemmingen";
-            timezone = "Europe/Germany";
-            units = "metric";
-            cache = 5;
-            format = {
-              maximumFractionDigits = 1;
             };
           };
         }
