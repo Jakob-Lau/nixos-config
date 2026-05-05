@@ -23,7 +23,7 @@ in
       settings = {
         # title = dashboardHost;
         headerStyle = "clean";
-        language = "de";
+        language = "en";
         target = "_blank";
       };
 
@@ -63,12 +63,6 @@ in
             memory = true;
             disk = "/";
             network = true;
-          };
-        }
-        # basic system info
-        {
-          info = {
-            uptime = true;
           };
         }
       ];
