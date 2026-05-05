@@ -25,6 +25,7 @@ in
         headerStyle = "clean";
         language = "en";
         target = "_blank";
+        color = "slate";
       };
 
       # Services (tiles)
@@ -63,6 +64,7 @@ in
             memory = true;
             disk = "/";
             network = true;
+            uptime = true;
           };
         }
       ];
