@@ -12,6 +12,12 @@ in
 
     homepage.enable = true;
 
+    home-assistant = {
+      enable = true;
+      port = 8123;
+      dnSEntry = "automation";
+    };
+
     tailscale = {
       enable = true;
       subnetRouter = "192.168.0.0/24";
