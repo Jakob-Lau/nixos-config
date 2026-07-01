@@ -19,6 +19,7 @@ in
     services.home-assistant = {
       enable = true;
       openFirewall = true;
+      config = null;
     };
 
     # add dns entry to dnsmasq
