@@ -28,6 +28,7 @@ in
         color = "slate";
       };
 
+      # TODO services should define their services itself, not hardcoded in the dashboard
       # Services (tiles)
       services = [
         {
