@@ -6,13 +6,6 @@ in
 {
   options.my.profiles.home-assistant = with lib; {
     enable = mkEnableOption "Home Assistant";
-
-    port = mkOption {
-      type = types.port;
-      default = 8123;
-      example = 8123;
-      description = "The port on which to listen";
-    };
     
     dnsEntry = mkOption {
       type = types.nullOr types.str;
@@ -27,11 +20,10 @@ in
       enable = true;
       openFirewall = true;
     };
-    services.home-assistant.config.port = cfg.port;
 
     # add dns entry to dnsmasq
     my.profiles.dnsConfig.entries = lib.mkIf (cfg.dnsEntry != null) [
-      { name = cfg.dnsEntry; port = cfg.port; }
+      { name = cfg.dnsEntry; port = 8123; }
     ];
 
 

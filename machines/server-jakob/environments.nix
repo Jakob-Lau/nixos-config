@@ -14,7 +14,6 @@ in
 
     home-assistant = {
       enable = true;
-      port = 8123;
       dnsEntry = "automation";
     };
 
