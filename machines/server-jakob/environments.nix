@@ -12,6 +12,11 @@ in
 
     homepage.enable = true;
 
+    home-assistant = {
+      enable = true;
+      dnsEntry = "automation";
+    };
+
     tailscale = {
       enable = true;
       subnetRouter = "192.168.0.0/24";
