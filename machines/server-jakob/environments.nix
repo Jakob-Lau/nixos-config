@@ -10,6 +10,8 @@ in
       ipAddress = "192.168.0.96";
     };
 
+    homepage.enable = true;
+
     tailscale = {
       enable = true;
       subnetRouter = "192.168.0.0/24";

@@ -2,6 +2,7 @@
 {
   imports = [
     ./dnsConfig
+    ./homepage
     ./paperless
   ];
 }
