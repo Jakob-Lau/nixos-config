@@ -15,7 +15,7 @@ in
     home-assistant = {
       enable = true;
       port = 8123;
-      dnSEntry = "automation";
+      dnsEntry = "automation";
     };
 
     tailscale = {
