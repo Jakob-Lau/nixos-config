@@ -43,7 +43,7 @@ in
     {
       assertions = [
         {
-          assertion = !cfg.enable || cfg.ipAddress != null;
+          assertion = !cfg.enable || cfg.ipAddress == null;
           message = "dnsConfig: ipAddress must be set when enable = true";
         }
 
