@@ -26,7 +26,7 @@ in
       ];
 
       customComponents = with pkgs.home-assistant-custom-components; [
-        hacs
+        "hacs"
       ];
       
       config = {
