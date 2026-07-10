@@ -23,7 +23,6 @@ in
       extraComponents = [
         "shelly"
         "vodafone_station"
-        "hacs"
       ];
       
       config = {
