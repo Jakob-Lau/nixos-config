@@ -2,6 +2,23 @@
 let
   cfg = config.my.profiles.home-assistant;
   # hostName = config.networking.hostName;
+
+  dreame-vacuum = pkgs.stdenvNoCC.mkDerivation {
+    pname = "dreame-vacuum";
+    version = "2.0.0b21"; # or a specific tag/commit
+
+    src = pkgs.fetchFromGitHub {
+      owner = "Tasshack";
+      repo = "dreame-vacuum";
+      rev = "v2.0.0b25";
+      hash = "sha256-eZcv3Xwywt4UDxEU1aP60+KtOj1xibPPahFim2U5gaA=";
+    };
+
+    installPhase = ''
+      mkdir -p $out
+      cp -r custom_components/dreame_vacuum $out/
+    '';
+  };
 in
 {
   options.my.profiles.home-assistant = with lib; {
@@ -25,8 +42,8 @@ in
         "vodafone_station"
       ];
 
-      customComponents = with pkgs.home-assistant-custom-components; [
-        "hacs"
+      customComponents = [
+        dreame-vacuum
       ];
       
       config = {
