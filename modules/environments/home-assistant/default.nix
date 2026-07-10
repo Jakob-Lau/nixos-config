@@ -20,11 +20,7 @@ in
       enable = true;
       openFirewall = true;
       config = {
-	homeassistant = {
-	  name = "Hemmingen";
-	  unit_system = "metric";
-	  time_zone = "Europe/Berlin";
-	};
+	default_config = {};
 	http = {
 	  use_x_forwarded_for = true;
  	  trusted_proxies = [ "127.0.0.1" "::1" ];
