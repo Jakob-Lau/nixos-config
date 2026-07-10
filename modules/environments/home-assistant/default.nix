@@ -3,9 +3,10 @@ let
   cfg = config.my.profiles.home-assistant;
   # hostName = config.networking.hostName;
 
-  dreame-vacuum = pkgs.stdenvNoCC.mkDerivation {
-    pname = "dreame-vacuum";
-    version = "2.0.0b21"; # or a specific tag/commit
+  dreame-vacuum = pkgs.buildHomeAssistantComponent {
+    owner = "Tasshack";
+    domain = "dreame-vacuum";
+    version = "v2.0.0b25";
 
     src = pkgs.fetchFromGitHub {
       owner = "Tasshack";
@@ -14,10 +15,15 @@ let
       hash = "sha256-eZcv3Xwywt4UDxEU1aP60+KtOj1xibPPahFim2U5gaA=";
     };
 
-    installPhase = ''
-      mkdir -p $out
-      cp -r custom_components/dreame_vacuum $out/
-    '';
+    dependencies = with pkgs.python3Packages; [
+      "pillow"
+      "numpy"
+      "requests"
+      "pycryptodome"
+      "python-miio"
+      "mini-racer"
+      "paho-mqtt"
+    ];
   };
 in
 {
