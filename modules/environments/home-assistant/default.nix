@@ -2,29 +2,6 @@
 let
   cfg = config.my.profiles.home-assistant;
   # hostName = config.networking.hostName;
-
-  dreame-vacuum = pkgs.buildHomeAssistantComponent {
-    owner = "Tasshack";
-    domain = "dreame-vacuum";
-    version = "v2.0.0b25";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "Tasshack";
-      repo = "dreame-vacuum";
-      rev = "v2.0.0b25";
-      hash = "sha256-eZcv3Xwywt4UDxEU1aP60+KtOj1xibPPahFim2U5gaA=";
-    };
-
-    dependencies = with pkgs.python3Packages; [
-      "pillow"
-      "numpy"
-      "requests"
-      "pycryptodome"
-      "python-miio"
-      "mini-racer"
-      "paho-mqtt"
-    ];
-  };
 in
 {
   options.my.profiles.home-assistant = with lib; {
@@ -46,10 +23,6 @@ in
       extraComponents = [
         "shelly"
         "vodafone_station"
-      ];
-
-      customComponents = [
-        dreame-vacuum
       ];
       
       config = {
