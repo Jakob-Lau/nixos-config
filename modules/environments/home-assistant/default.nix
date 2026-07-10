@@ -23,7 +23,10 @@ in
       extraComponents = [
         "shelly"
         "vodafone_station"
-        "hacs"
+      ];
+
+      customComponents = with pkgs.home-assistant-custom-components; [
+        hacs
       ];
       
       config = {
