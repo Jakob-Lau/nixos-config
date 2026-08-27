@@ -58,7 +58,7 @@ in
         echo "Backing up Paperless media..."
 
         ${pkgs.rsync}/bin/rsync -a \
-          /var/lib/paperless/ \
+          ${config.services.paperless.dataDir} \
           "$BACKUP_DIR/"
       '';
     };
