@@ -28,7 +28,7 @@ in
       enable = true;
       dnsEntry = "immich";
       port = 2283;
-    }
+    };
 
     tailscale = {
       enable = true;
