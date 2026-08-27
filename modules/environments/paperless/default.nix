@@ -33,7 +33,7 @@ in
   config = lib.mkIf cfg.enable {
     services.paperless = {
       enable = true;
-      address = "0.0.0.0";
+      address = "127.0.0.1";
       port = cfg.port;
       settings = cfg.settings;
     };
