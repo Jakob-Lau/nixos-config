@@ -24,6 +24,12 @@ in
     #  dnsEntry = "automation";
     #};
 
+    immich = {
+      enable = true;
+      dnsEntry = "immich";
+      port = 2283;
+    }
+
     tailscale = {
       enable = true;
       subnetRouter = "192.168.0.0/24";
