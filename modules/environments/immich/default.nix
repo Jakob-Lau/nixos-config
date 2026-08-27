@@ -24,7 +24,7 @@ in
   config = lib.mkIf cfg.enable {
     services.immich = {
       enable = true;
-      port = cfg.port
+      port = cfg.port;
     };
     networking.firewall.allowedTCPPorts = [ cfg.port ];
     # add dns entry to dnsmasq
