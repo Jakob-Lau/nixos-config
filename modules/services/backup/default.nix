@@ -9,6 +9,12 @@ let
         type = lib.types.lines;
         description = "Script to execute for this backup job.";
       };
+
+      cleanup = lib.mkOption {
+        type = lib.types.lines;
+        description = "Script to execute after the backup job, even if it fails";
+        default = "";
+      };
     };
   };
 
@@ -16,7 +22,7 @@ let
   jobs = lib.mapAttrsToList
     (name: job: {
       inherit name;
-      inherit (job) script;
+      inherit (job) script cleanup;
     })
     cfg.jobs;
 
@@ -32,6 +38,13 @@ let
 
     echo "Backup job completed: ${job.name}"
   '') jobs;
+
+  # Creates a shell script that contains all the cleanup scripts from the jobs
+  jobCleanups = lib.concatMapStringsSep "\n" (job: ''
+    echo "Cleaning up backup job: ${job.name}"
+    ${job.cleanup}
+  '') jobs;
+
 in
 {
   options.my.profiles.backup = with lib; {
@@ -82,6 +95,10 @@ in
 
           cleanup() {
             local exit_code=$?
+
+            echo "Running backup cleanup..."
+
+            ${jobCleanups}
 
             echo "Unmounting backup drive..."
 
