@@ -1,8 +1,8 @@
 # dns server
 { config, lib, ... }:
-let 
+let
   cfg = config.my.profiles.dnsConfig;
-in 
+in
 {
   options.my.profiles.dnsConfig = with lib; {
     enable = mkEnableOption "Local Network DNS Server + Reverse Proxy";
@@ -27,6 +27,12 @@ in
             type = types.port;
             example = 8080;
             description = "Target port for the service";
+          };
+
+          extraConfig = mkOption {
+            type = lib.types.lines;
+            description = "Extra proxy settings for this service";
+            default = "";
           };
         };
       });
@@ -83,6 +89,8 @@ in
               locations."/" = {
                 proxyPass = "http://127.0.0.1:${builtins.toString entry.port}";
                 proxyWebsockets = true;
+
+                extraConfig = entry.extraConfig;
               };
             };
           }) cfg.entries
