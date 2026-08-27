@@ -19,10 +19,10 @@ in
 
     homepage.enable = true;
 
-    home-assistant = {
-      enable = true;
-      dnsEntry = "automation";
-    };
+    #home-assistant = {
+    #  enable = true;
+    #  dnsEntry = "automation";
+    #};
 
     tailscale = {
       enable = true;
