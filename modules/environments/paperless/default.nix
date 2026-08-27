@@ -46,20 +46,31 @@ in
     my.profiles.backup.jobs.paperless = {
       script = ''
         echo "Stopping Paperless..."
-        ${pkgs.systemd}/bin/systemctl stop paperless.service
-
         restart_paperless() {
-          echo "Starting Paperless..."
-          ${pkgs.systemd}/bin/systemctl start paperless.service
+            echo "Starting Paperless services..."
+
+            ${pkgs.systemd}/bin/systemctl start \
+                paperless-consumer.service \
+                paperless-scheduler.service \
+                paperless-task-queue.service \
+                paperless-web.service
         }
 
         trap restart_paperless EXIT
 
-        echo "Backing up Paperless media..."
+        echo "Stopping Paperless services..."
+
+        ${pkgs.systemd}/bin/systemctl stop \
+            paperless-consumer.service \
+            paperless-scheduler.service \
+            paperless-task-queue.service \
+            paperless-web.service
+
+        echo "Backing up Paperless..."
 
         ${pkgs.rsync}/bin/rsync -a \
-          ${config.services.paperless.dataDir} \
-          "$BACKUP_DIR/"
+            ${config.services.paperless.dataDir}/ \
+            "$BACKUP_DIR/"
       '';
     };
   };
