@@ -10,7 +10,7 @@ in
       device = "/dev/disk/by-uuid/40332bb2-1e4f-4887-add0-867f19048dc8";
       mountPoint = "/mnt/backup";
       schedule = "Sun 03:00";
-    }
+    };
 
     dnsConfig = {
       enable = true;
