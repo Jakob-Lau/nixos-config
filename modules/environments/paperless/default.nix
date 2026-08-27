@@ -1,5 +1,5 @@
 { config, lib, ... }:
-let 
+let
   cfg = config.my.profiles.paperless;
 in
 {
@@ -42,5 +42,25 @@ in
     my.profiles.dnsConfig.entries = lib.mkIf (cfg.dnsEntry != null) [
       { name = cfg.dnsEntry; port = cfg.port; }
     ];
+    # backup description
+    my.profiles.backup.jobs.paperless = {
+      script = ''
+        echo "Stopping Paperless..."
+        ${pkgs.systemd}/bin/systemctl stop paperless.service
+
+        restart_paperless() {
+          echo "Starting Paperless..."
+          ${pkgs.systemd}/bin/systemctl start paperless.service
+        }
+
+        trap restart_paperless EXIT
+
+        echo "Backing up Paperless media..."
+
+        ${pkgs.rsync}/bin/rsync -a \
+          /var/lib/paperless/ \
+          "$BACKUP_DIR/"
+      '';
+    };
   };
 }

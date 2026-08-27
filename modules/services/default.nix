@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./backup
     ./tailscale
   ];
 }
