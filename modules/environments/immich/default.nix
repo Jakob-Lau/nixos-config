@@ -30,7 +30,15 @@ in
     networking.firewall.allowedTCPPorts = [ cfg.port ];
     # add dns entry to dnsmasq
     my.profiles.dnsConfig.entries = lib.mkIf (cfg.dnsEntry != null) [
-      { name = cfg.dnsEntry; port = cfg.port; }
+      {
+        name = cfg.dnsEntry;
+        port = cfg.port;
+        extraConfig = ''
+          client_max_body_size "0"
+          proxy_read_timeout "600s"
+          proxy_send_timeout "600s"
+        '';
+      }
     ];
   };
 }
