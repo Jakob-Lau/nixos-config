@@ -103,15 +103,15 @@ in
             shared_secret {$INWX_SHARED_SECRET}
           }
         '';
-        virtualHosts."*.${cfg.domain}".extraConfig = ''
-          tls
-        '';
 
         virtualHosts = builtins.listToAttrs (
           builtins.map (entry: {
             name = "${entry.name}.${cfg.domain}";
             value = {
               extraConfig = ''
+                tls {
+                  dns inwx
+                }
                 reverse_proxy 127.0.0.1:${builtins.toString entry.port} {
                   ${entry.extraConfig}
                 }
