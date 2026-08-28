@@ -1,5 +1,5 @@
 # dns server
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.dnsConfig;
 in
@@ -12,6 +12,12 @@ in
       default = null;
       example = "192.168.0.50";
       description = "The IP Address to route resolve hostnames to.";
+    };
+
+    domain = mkOption {
+      type = types.str;
+      example = "example.com";
+      description = "the domain the services should be hosted on.";
     };
 
     entries = mkOption {
@@ -72,7 +78,7 @@ in
           # Listen on interfaces (local and tailsacle) for DNS requests
           bind-interfaces = false;
 
-          address = builtins.map (entry: "/${entry.name}.home/${cfg.ipAddress}") cfg.entries;
+          address = builtins.map (entry: "/${entry.name}.${cfg.domain}/${cfg.ipAddress}") cfg.entries;
 
           # Increase cache size to solve "We detected weir network activity from you address" warning
           cache-size = 2000;
@@ -81,9 +87,16 @@ in
       services.caddy = {
         enable = true;
 
+        package = pkgs.caddy.withPlugins {
+          plugins = [
+            "github.com/caddy-dns/inwx@v0.4.1"
+          ];
+          hash = "sha256-Hv7nrN9voG2qRqjL/2ZN3v31PfIwWOlC0Ut6+xuPdGQ=";
+        };
+
         virtualHosts = builtins.listToAttrs (
           builtins.map (entry: {
-            name = "${entry.name}.home";
+            name = "${entry.name}.${cfg.domain}";
             value = {
               extraConfig = ''
                 reverse_proxy 127.0.0.1:${builtins.toString entry.port} {
