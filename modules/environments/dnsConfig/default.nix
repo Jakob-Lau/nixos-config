@@ -78,24 +78,6 @@ in
           cache-size = 2000;
         };
       };
-      services.nginx = {
-        enable = true;
-        recommendedProxySettings = true;
-
-        virtualHosts = builtins.listToAttrs (
-          builtins.map (entry: {
-            name = "${entry.name}.home";
-            value = {
-              locations."/" = {
-                proxyPass = "http://127.0.0.1:${builtins.toString entry.port}";
-                proxyWebsockets = true;
-
-                extraConfig = entry.extraConfig;
-              };
-            };
-          }) cfg.entries
-        );
-      };
       services.caddy = {
         enable = true;
 
