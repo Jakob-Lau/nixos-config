@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.immich;
+  domain = config.my.profiles.dnsConfig.domain;
 in
 {
   options.my.profiles.immich = with lib; {
@@ -33,6 +34,21 @@ in
       {
         name = cfg.dnsEntry;
         port = cfg.port;
+      }
+    ];
+
+    # add homepage entry
+    services.homepage-dashboard.services = [
+      {
+        "Media" = [
+          {
+            "Immich" = {
+              icon = "immich.png";
+              href = "https://${cfg.dnsEntry}.${domain}";
+              description = "Photo management";
+            };
+          }
+        ];
       }
     ];
   };

@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.paperless;
+  domain = config.my.profiles.dnsConfig.domain;
 in
 {
   options.my.profiles.paperless = with lib; {
@@ -42,6 +43,22 @@ in
     my.profiles.dnsConfig.entries = lib.mkIf (cfg.dnsEntry != null) [
       { name = cfg.dnsEntry; port = cfg.port; }
     ];
+
+    # add homepage dashboard entry
+    services.homepage-dashboard.services = [
+      {
+        "Documents" = [
+          {
+            "Paperless" = {
+              icon = "paperless-ngx.png";
+              href = "https://${cfg.dnsEntry}.${domain}";
+              description = "Document management";
+            };
+          }
+        ];
+      }
+    ];
+
     # backup description
     my.profiles.backup.jobs.paperless = {
       script = ''

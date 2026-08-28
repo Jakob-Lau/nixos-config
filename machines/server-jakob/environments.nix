@@ -18,7 +18,10 @@ in
       domain = "jakobsclou.de";
     };
 
-    homepage.enable = true;
+    homepage = {
+      enable = true;
+      host = "dashboard";
+    };
 
     #home-assistant = {
     #  enable = true;
