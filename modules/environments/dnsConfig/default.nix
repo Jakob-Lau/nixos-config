@@ -94,6 +94,19 @@ in
           hash = "sha256-Hv7nrN9voG2qRqjL/2ZN3v31PfIwWOlC0Ut6+xuPdGQ=";
         };
 
+        # register certificate and enable tls on domain
+        environmentFile = "/etc/caddy/secrets.env";
+        globalConfig = ''
+          acme_dns inwx {
+            username {$INWX_USERNAME}
+            password {$INWX_PASSWORD}
+            shared_secret {$INWX_SHARED_SECRET}
+          }
+        '';
+        virtualHosts."*.${cfg.domain}".extraConfig = ''
+          tls
+        '';
+
         virtualHosts = builtins.listToAttrs (
           builtins.map (entry: {
             name = "${entry.name}.${cfg.domain}";
