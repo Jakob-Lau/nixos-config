@@ -15,6 +15,7 @@ in
     dnsConfig = {
       enable = true;
       ipAddress = "192.168.0.96";
+      domain = "jakobsclou.de"
     };
 
     homepage.enable = true;
