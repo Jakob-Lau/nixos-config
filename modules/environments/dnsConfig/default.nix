@@ -91,7 +91,7 @@ in
           plugins = [
             "github.com/caddy-dns/inwx@v0.4.1"
           ];
-          hash = "";
+          hash = "sha256-Hv7nrN9voG2qRqjL/2ZN3v31PfIwWOlC0Ut6+xuPdGQ=";
         };
 
         virtualHosts = builtins.listToAttrs (
