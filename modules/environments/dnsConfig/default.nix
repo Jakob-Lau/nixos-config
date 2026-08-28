@@ -1,5 +1,5 @@
 # dns server
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.dnsConfig;
 in
