@@ -6,22 +6,33 @@
 }:
 let
   cfg = config.my.profiles.homepage;
+  domain = config.my.profiles.dnsConfig.domain;
   dashboardPort = 8082;
-  dashboardHost = "dashboard";
 in
 {
   options.my.profiles.homepage = with lib; {
     enable = mkEnableOption "Homepage Dashboard";
+
+    host = mkOption {
+      type = types.str;
+      example = "dashboard";
+      description = "The hostname of this service.";
+    };
+
+    domain = mkOption {
+      type = types.str;
+      example = "example.com";
+      description = "The domain the service is running on. Required to set the allowedHosts";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.homepage-dashboard = {
       enable = true;
       listenPort = dashboardPort;
-      allowedHosts = "${dashboardHost}.home,localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
+      allowedHosts = "${cfg.host}.${cfg.domain},localhost:${toString dashboardPort},127.0.0.1:${toString dashboardPort}";
 
       settings = {
-        # title = dashboardHost;
         headerStyle = "clean";
         language = "en";
         target = "_blank";
@@ -73,7 +84,7 @@ in
 
     # add dns entry to dnsmasq
     my.profiles.dnsConfig.entries = [
-      { name = dashboardHost; port = dashboardPort; }
+      { name = cfg.host; port = dashboardPort; }
     ];
   };
 }

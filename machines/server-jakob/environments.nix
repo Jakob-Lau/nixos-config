@@ -5,6 +5,12 @@ let
 in
 {
   my.profiles = {
+    dnsConfig = {
+      enable = true;
+      ipAddress = "192.168.0.96";
+      domain = "jakobsclou.de";
+    };
+
     backup = {
       enable = true;
       device = "/dev/disk/by-uuid/40332bb2-1e4f-4887-add0-867f19048dc8";
@@ -12,13 +18,10 @@ in
       schedule = "Sun 03:00";
     };
 
-    dnsConfig = {
+    homepage = {
       enable = true;
-      ipAddress = "192.168.0.96";
-      domain = "jakobsclou.de";
+      host = "dashboard";
     };
-
-    homepage.enable = true;
 
     #home-assistant = {
     #  enable = true;
