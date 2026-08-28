@@ -29,5 +29,5 @@ sudo systemctl restart tailscaled
 ```
 
 # todos
-- [ ] How to properly define user groups per machine?
-- [ ] How to properly define the ssh keys per machine?
+- [ ] homepage needs to access the domain and dnsEntry. This needs to be defined somehow
+- [ ] ntfy to alert about failing backups
