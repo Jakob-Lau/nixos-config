@@ -2,6 +2,16 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.dnsConfig;
+
+  inwxTls = ''
+    tls {
+      dns inwx {
+        username {$INWX_USERNAME}
+        password {$INWX_PASSWORD}
+        shared_secret {$INWX_SHARED_SECRET}
+      }
+    }
+  '';
 in
 {
   options.my.profiles.dnsConfig = with lib; {
@@ -96,22 +106,14 @@ in
 
         # register certificate and enable tls on domain
         environmentFile = "/etc/caddy/secrets.env";
-        globalConfig = ''
-          acme_dns inwx {
-            username {$INWX_USERNAME}
-            password {$INWX_PASSWORD}
-            shared_secret {$INWX_SHARED_SECRET}
-          }
-        '';
 
         virtualHosts = builtins.listToAttrs (
           builtins.map (entry: {
             name = "${entry.name}.${cfg.domain}";
             value = {
               extraConfig = ''
-                tls {
-                  dns inwx
-                }
+                ${inwxTls}
+
                 reverse_proxy 127.0.0.1:${builtins.toString entry.port} {
                   ${entry.extraConfig}
                 }
