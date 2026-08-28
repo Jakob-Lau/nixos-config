@@ -96,6 +96,22 @@ in
           }) cfg.entries
         );
       };
+      services.caddy = {
+        enable = true;
+
+        virtualHosts = builtins.listToAttrs (
+          builtins.map (entry: {
+            name = "${entry.name}.home";
+            value = {
+              extraConfig = ''
+                reverse_proxy 127.0.0.1:${builtins.toString entry.port} {
+                  ${entry.extraConfig}
+                }
+              '';
+            };
+          }) cfg.entries
+        );
+      };
 
       # set webserver network ports to open (53 required for DNS server)
       networking.firewall.allowedTCPPorts = [ 53 80 443 ];

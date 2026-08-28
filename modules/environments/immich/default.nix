@@ -33,11 +33,6 @@ in
       {
         name = cfg.dnsEntry;
         port = cfg.port;
-        extraConfig = ''
-          client_max_body_size 0;
-          proxy_read_timeout 600s;
-          proxy_send_timeout 600s;
-        '';
       }
     ];
   };
