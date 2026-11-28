@@ -35,8 +35,14 @@ in
       enable = true;
       address = "127.0.0.1";
       port = cfg.port;
-      settings = cfg.settings;
+      settings = lib.mkMerge [
+        cfg.settings
+        (lib.mkIf (cfg.dnsEntry != null && config.my.profiles.dnsConfig.enable) {
+          PAPERLESS_URL = lib.mkDefault "https://${cfg.dnsEntry}.${config.my.profiles.dnsConfig.domain}";
+        })
+      ];
     };
+
     networking.firewall.allowedTCPPorts = [ cfg.port ];
     # add dns entry to dnsmasq
     my.profiles.dnsConfig.entries = lib.mkIf (cfg.dnsEntry != null) [
